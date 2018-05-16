@@ -1,7 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import registerServiceWorker from './registerServiceWorker';
+import configureStore from './configureStore';
+import Root from './root';
+
+const store = configureStore();
+
+const render = (RootComponent) => {
+  ReactDOM.render(<RootComponent store={store} />, document.getElementById('root'));
+};
+
 registerServiceWorker();
+
+render(Root);
+
+if (module.hot) {
+  module.hot.accept('./root.js', () => {
+    const NextRoot = require('./root.js').default;
+    setTimeout(
+      () => {
+        render(NextRoot);
+      },
+      0
+    );
+  });
+}
