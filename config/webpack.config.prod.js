@@ -167,11 +167,6 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              presets: [
-                [ 'env', { modules: false } ],
-                'react',
-                'stage-2'
-              ],
               compact: true
             }
           },
