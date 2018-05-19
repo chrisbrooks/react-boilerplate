@@ -271,7 +271,6 @@ module.exports = {
     new InterpolateHtmlPlugin(env.raw),
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
-      inject: true,
       template: paths.appHtml,
       minify: {
         removeComments: true,
@@ -315,6 +314,9 @@ module.exports = {
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
     new ExtractTextPlugin({
       filename: cssFilename
+    }),
+    new ManifestPlugin({
+      fileName: 'asset-manifest.json'
     }),
     // Generate a service worker script that will precache, and keep up to date,
     // the HTML & assets that are part of the Webpack build.
